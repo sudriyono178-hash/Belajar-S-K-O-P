@@ -7,7 +7,6 @@
 <title>Belajar Korea SKOP</title>
 
 <link rel="manifest" href="manifest.json">
-
 <meta name="theme-color" content="#4CAF50">
 
 <style>
@@ -34,7 +33,9 @@ flex:1;
 padding:12px;
 font-size:16px;
 border:none;
-border-radius:10px;
+border-radius:12px;
+background:#4CAF50;
+color:white;
 }
 
 .box{
@@ -42,6 +43,7 @@ background:white;
 padding:15px;
 border-radius:12px;
 margin-bottom:15px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
 }
 
 .hidden{
@@ -55,38 +57,44 @@ padding:10px;
 font-size:24px;
 }
 
+.pilih{
+padding:10px;
+margin:5px;
+border:none;
+border-radius:10px;
+background:#eee;
+font-size:18px;
+}
+
 </style>
 
 </head>
 
 <body>
 
-<h1>Belajar Korea SKOP</h1>
+<h1>🇰🇷 Belajar Korea SKOP</h1>
 
 <div class="menu">
 
 <button onclick="showTranslate()">
-
 🎤 Translate
-
 </button>
 
 <button onclick="showBelajar()">
-
 📚 Belajar
-
 </button>
 
 </div>
 
+
+<!-- MODE TRANSLATE -->
+
 <div id="translate">
 
-<h3>🎤 Mode Translate</h3>
+<h2>🎤 Mode Translate</h2>
 
 <button onclick="mulaiBicara()">
-
 🎤 Bicara
-
 </button>
 
 <div class="box">
@@ -116,29 +124,7 @@ font-size:24px;
 </div>
 
 
-</div>
-
-
-<div class="box">
-
-<h3>Bahasa Korea</h3>
-
-<p>저는 먹고 싶어요.</p>
-
-</div>
-
-
-<div class="box">
-
-<h3>Ejaan</h3>
-
-<p>Jeoneun meokgo sipeoyo.</p>
-
-</div>
-
-</div>
-
-
+<!-- MODE BELAJAR -->
 
 <div id="belajar" class="hidden">
 
@@ -159,9 +145,13 @@ ____________
 
 <h3>Kosakata</h3>
 
-<button onclick="pilih('저')">저</button>
+<button class="pilih" onclick="pilih(this,'저')">
+저
+</button>
 
-<button onclick="pilih('먹다')">먹다</button>
+<button class="pilih" onclick="pilih(this,'먹다')">
+먹다
+</button>
 
 </div>
 
@@ -170,7 +160,9 @@ ____________
 
 <h3>Partikel</h3>
 
-<button onclick="pilih('는')">는</button>
+<button class="pilih" onclick="pilih(this,'는')">
+는
+</button>
 
 </div>
 
@@ -179,10 +171,8 @@ ____________
 
 <h3>Akhiran</h3>
 
-<button onclick="pilih('고 싶어요')">
-
+<button class="pilih" onclick="pilih(this,'고 싶어요')">
 고 싶어요
-
 </button>
 
 </div>
@@ -194,7 +184,14 @@ ____________
 
 <p>
 
-Rumus:
+Indonesia :
+Saya mau makan
+
+</p>
+
+<p>
+
+Rumus :
 
 Subjek + 는 + Kata Kerja + 고 싶어요
 
@@ -203,7 +200,6 @@ Subjek + 는 + Kata Kerja + 고 싶어요
 </div>
 
 </div>
-
 
 
 <script>
@@ -216,6 +212,7 @@ document.getElementById("belajar").classList.add("hidden");
 
 }
 
+
 function showBelajar(){
 
 document.getElementById("belajar").classList.remove("hidden");
@@ -225,18 +222,35 @@ document.getElementById("translate").classList.add("hidden");
 }
 
 
+
 let hasil=[];
 
-
-function pilih(kata){
+function pilih(btn,kata){
 
 hasil.push(kata);
 
 document.getElementById("susun").innerText=
-
 hasil.join(" ");
 
+btn.disabled=true;
+
 }
+
+
+
+function mulaiBicara(){
+
+document.getElementById("indo").innerText=
+"Saya mau makan";
+
+document.getElementById("korea").innerText=
+"저는 먹고 싶어요";
+
+document.getElementById("ejaan").innerText=
+"Jeoneun meokgo sipeoyo";
+
+}
+
 
 
 if('serviceWorker' in navigator){
@@ -248,13 +262,8 @@ navigator.serviceWorker.register('./service-worker.js')
 .catch(err=>console.log(err));
 
 }
-function mulaiBicara(){
 
-alert("Tombol berhasil ditekan");
-
-}
 </script>
 
 </body>
-
 </html>
