@@ -328,14 +328,15 @@ window.webkitSpeechRecognition;
 
 if(!SpeechRecognition){
 
-alert("Browser tidak mendukung");
+alert(
+"Browser atau PWA ini tidak mendukung fitur bicara."
+);
 
 return;
 
 }
 
-
-
+alert("Speech Recognition tersedia");
 const recognition=
 
 new SpeechRecognition();
