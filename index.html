@@ -250,47 +250,7 @@ navigator.serviceWorker.register('./service-worker.js')
 }
 function mulaiBicara(){
 
-const SpeechRecognition =
-window.SpeechRecognition ||
-window.webkitSpeechRecognition;
-
-const recognition =
-new SpeechRecognition();
-
-recognition.lang='id-ID';
-
-recognition.start();
-
-recognition.onresult=function(event){
-
-const teks =
-event.results[0][0].transcript;
-
-document.getElementById("indo").innerText =
-teks;
-
-
-if(teks.toLowerCase()=="saya mau makan"){
-
-document.getElementById("korea").innerText =
-"저는 먹고 싶어요";
-
-document.getElementById("ejaan").innerText =
-"Jeoneun meokgo sipeoyo";
-
-}
-
-else{
-
-document.getElementById("korea").innerText =
-"Belum ada di database";
-
-document.getElementById("ejaan").innerText =
-"-";
-
-}
-
-}
+alert("Tombol berhasil ditekan");
 
 }
 </script>
