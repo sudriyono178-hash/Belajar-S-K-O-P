@@ -238,14 +238,41 @@ btn.disabled=true;
 
 function mulaiBicara(){
 
-document.getElementById("indo").innerText=
-"Saya mau makan";
+const SpeechRecognition =
+window.SpeechRecognition ||
+window.webkitSpeechRecognition;
 
-document.getElementById("korea").innerText=
+const recognition = new SpeechRecognition();
+
+recognition.lang = "id-ID";
+
+recognition.start();
+
+recognition.onresult = function(event){
+
+const teks = event.results[0][0].transcript;
+
+document.getElementById("indo").innerText = teks;
+
+if(teks.toLowerCase() == "saya mau makan"){
+
+document.getElementById("korea").innerText =
 "저는 먹고 싶어요";
 
-document.getElementById("ejaan").innerText=
+document.getElementById("ejaan").innerText =
 "Jeoneun meokgo sipeoyo";
+
+}else{
+
+document.getElementById("korea").innerText =
+"Belum ada di database";
+
+document.getElementById("ejaan").innerText =
+"-";
+
+}
+
+}
 
 }
 
