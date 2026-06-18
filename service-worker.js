@@ -1,4 +1,4 @@
-const CACHE_NAME = "belajar-korea-skop-v1";
+const CACHE_NAME = "belajar-korea-skop-v2";
 
 const urlsToCache = [
   "./",
