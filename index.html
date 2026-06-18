@@ -247,6 +247,8 @@ const recognition = new SpeechRecognition();
 recognition.lang = "id-ID";
 
 recognition.start();
+  
+alert("Silakan bicara...");
 
 recognition.onresult = function(event){
 
@@ -271,6 +273,13 @@ document.getElementById("ejaan").innerText =
 "-";
 
 }
+  
+}
+  
+recognition.onerror = function(event){
+
+alert(event.error);
+
 
 }
 
