@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Belajar Korea SKOP</title>
+
+<link rel="manifest" href="manifest.json">
+
+<meta name="theme-color" content="#4CAF50">
+
+<style>
+
+body{
+font-family:Arial,sans-serif;
+margin:0;
+padding:20px;
+background:#f5f5f5;
+}
+
+h1{
+text-align:center;
+}
+
+.menu{
+display:flex;
+gap:10px;
+margin-bottom:20px;
+}
+
+.menu button{
+flex:1;
+padding:12px;
+font-size:16px;
+border:none;
+border-radius:10px;
+}
+
+.box{
+background:white;
+padding:15px;
+border-radius:12px;
+margin-bottom:15px;
+}
+
+.hidden{
+display:none;
+}
+
+#susun{
+min-height:50px;
+border:2px dashed #ccc;
+padding:10px;
+font-size:24px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Belajar Korea SKOP</h1>
+
+<div class="menu">
+
+<button onclick="showTranslate()">
+
+🎤 Translate
+
+</button>
+
+<button onclick="showBelajar()">
+
+📚 Belajar
+
+</button>
+
+</div>
+
+
+<div id="translate">
+
+<div class="box">
+
+<h3>Indonesia</h3>
+
+<p>Saya mau makan.</p>
+
+</div>
+
+
+<div class="box">
+
+<h3>Bahasa Korea</h3>
+
+<p>저는 먹고 싶어요.</p>
+
+</div>
+
+
+<div class="box">
+
+<h3>Ejaan</h3>
+
+<p>Jeoneun meokgo sipeoyo.</p>
+
+</div>
+
+</div>
+
+
+
+<div id="belajar" class="hidden">
+
+<div class="box">
+
+<h3>Kalimat yang akan jadi</h3>
+
+<div id="susun">
+
+____________
+
+</div>
+
+</div>
+
+
+<div class="box">
+
+<h3>Kosakata</h3>
+
+<button onclick="pilih('저')">저</button>
+
+<button onclick="pilih('먹다')">먹다</button>
+
+</div>
+
+
+<div class="box">
+
+<h3>Partikel</h3>
+
+<button onclick="pilih('는')">는</button>
+
+</div>
+
+
+<div class="box">
+
+<h3>Akhiran</h3>
+
+<button onclick="pilih('고 싶어요')">
+
+고 싶어요
+
+</button>
+
+</div>
+
+
+<div class="box">
+
+<h3>Database</h3>
+
+<p>
+
+Rumus:
+
+Subjek + 는 + Kata Kerja + 고 싶어요
+
+</p>
+
+</div>
+
+</div>
+
+
+
+<script>
+
+function showTranslate(){
+
+document.getElementById("translate").classList.remove("hidden");
+
+document.getElementById("belajar").classList.add("hidden");
+
+}
+
+function showBelajar(){
+
+document.getElementById("belajar").classList.remove("hidden");
+
+document.getElementById("translate").classList.add("hidden");
+
+}
+
+
+let hasil=[];
+
+
+function pilih(kata){
+
+hasil.push(kata);
+
+document.getElementById("susun").innerText=
+
+hasil.join(" ");
+
+}
+
+
+if('serviceWorker' in navigator){
+
+navigator.serviceWorker.register('./service-worker.js')
+
+.then(()=>console.log("SW berhasil"))
+
+.catch(err=>console.log(err));
+
+}
+
+</script>
+
+</body>
+
+</html>
