@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Belajar Korea SKOP</title>
+<style>
+body{font-family:Arial,sans-serif;max-width:700px;margin:auto;padding:16px}
+h1{text-align:center}
+.tabs{display:flex;gap:10px;margin:12px 0}
+button{padding:10px 14px}
+.hidden{display:none}
+.box{border:1px solid #ddd;border-radius:12px;padding:12px;margin:10px 0}
+#susun{min-height:48px;font-size:24px}
+.grid{display:flex;flex-wrap:wrap;gap:8px}
+.pill{border:1px solid #bbb;border-radius:999px;padding:8px 12px;cursor:pointer}
+.pill.used{opacity:.5;pointer-events:none}
+.small{font-size:14px}
+</style>
+</head>
+<body>
+<h1>Belajar Korea SKOP</h1>
+
+<div class="tabs">
+  <button onclick="showTab('translate')">🎤 Translate</button>
+  <button onclick="showTab('belajar')">📚 Belajar SKOP</button>
+</div>
+
+<div id="translate">
+  <div class="box">
+    <b>Indonesia</b>
+    <p>Saya mau makan.</p>
+  </div>
+  <div class="box">
+    <b>Korea</b>
+    <p>저는 먹고 싶어요.</p>
+  </div>
+  <div class="box">
+    <b>Ejaan</b>
+    <p>Jeoneun meokgo sipeoyo.</p>
+  </div>
+</div>
+
+<div id="belajar" class="hidden">
+  <div class="box">
+    <b>Kalimat yang akan jadi</b>
+    <div id="susun">______________</div>
+  </div>
+
+  <div class="box">
+    <b>Kosakata</b>
+    <div class="grid" id="kosakata"></div>
+  </div>
+
+  <div class="box">
+    <b>Partikel</b>
+    <div class="grid" id="partikel"></div>
+  </div>
+
+  <div class="box">
+    <b>Akhiran</b>
+    <div class="grid" id="akhiran"></div>
+  </div>
+
+  <div class="box small">
+    <b>Database</b>
+    <p>Rumus: Subjek + 는 + Kata Kerja + 고 싶어요</p>
+  </div>
+</div>
+
+<script>
+function showTab(id){
+  document.getElementById('translate').classList.add('hidden');
+  document.getElementById('belajar').classList.add('hidden');
+  document.getElementById(id).classList.remove('hidden');
+}
+
+let hasil=[];
+
+const data={
+  kosakata:["저","먹다"],
+  partikel:["는"],
+  akhiran:["고 싶어요"]
+};
+
+function render(id, arr){
+  const el=document.getElementById(id);
+  arr.forEach(k=>{
+    const b=document.createElement("button");
+    b.className="pill";
+    b.innerText=k+" ✅";
+    b.onclick=()=>{
+      hasil.push(k);
+      gabung();
+      b.classList.add("used");
+    };
+    el.appendChild(b);
+  });
+}
+
+function gabung(){
+  let out=[...hasil];
+
+  for(let i=1;i<out.length;i++){
+    if(out[i]==="는") out[i-1]+=out[i], out.splice(i,1), i--;
+  }
+
+  const idxVerb=out.indexOf("먹다");
+  const idxEnd=out.indexOf("고 싶어요");
+  if(idxVerb>-1 && idxEnd>-1){
+    out[idxVerb]="먹고 싶어요";
+    out.splice(idxEnd,1);
+  }
+
+  document.getElementById("susun").innerText=out.join(" ");
+}
+
+render("kosakata",data.kosakata);
+render("partikel",data.partikel);
+render("akhiran",data.akhiran);
+
+if('serviceWorker' in navigator){
+ navigator.serviceWorker.register('./service-worker.js');
+}
+</script>
+</body>
+</html>
