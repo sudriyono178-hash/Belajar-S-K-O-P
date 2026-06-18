@@ -79,14 +79,42 @@ font-size:24px;
 
 </div>
 
-
 <div id="translate">
+
+<h3>🎤 Mode Translate</h3>
+
+<button onclick="mulaiBicara()">
+
+🎤 Bicara
+
+</button>
 
 <div class="box">
 
 <h3>Indonesia</h3>
 
-<p>Saya mau makan.</p>
+<p id="indo">-</p>
+
+</div>
+
+<div class="box">
+
+<h3>Bahasa Korea</h3>
+
+<p id="korea">-</p>
+
+</div>
+
+<div class="box">
+
+<h3>Ejaan</h3>
+
+<p id="ejaan">-</p>
+
+</div>
+
+</div>
+
 
 </div>
 
@@ -220,7 +248,51 @@ navigator.serviceWorker.register('./service-worker.js')
 .catch(err=>console.log(err));
 
 }
+function mulaiBicara(){
 
+const SpeechRecognition =
+window.SpeechRecognition ||
+window.webkitSpeechRecognition;
+
+const recognition =
+new SpeechRecognition();
+
+recognition.lang='id-ID';
+
+recognition.start();
+
+recognition.onresult=function(event){
+
+const teks =
+event.results[0][0].transcript;
+
+document.getElementById("indo").innerText =
+teks;
+
+
+if(teks.toLowerCase()=="saya mau makan"){
+
+document.getElementById("korea").innerText =
+"저는 먹고 싶어요";
+
+document.getElementById("ejaan").innerText =
+"Jeoneun meokgo sipeoyo";
+
+}
+
+else{
+
+document.getElementById("korea").innerText =
+"Belum ada di database";
+
+document.getElementById("ejaan").innerText =
+"-";
+
+}
+
+}
+
+}
 </script>
 
 </body>
